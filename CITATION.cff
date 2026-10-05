@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this reproducibility package, please cite the associated manuscript."
+title: "PIFI-3D Reproducibility Package"
+type: software
+authors:
+  - family-names: "Katsubo"
+    given-names: "Maks"
+repository-code: "https://github.com/Ecosphera-Lab/pifi-3d-reproducibility"
+version: "0.5"
+date-released: "2026-10-05"

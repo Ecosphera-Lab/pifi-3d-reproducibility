@@ -1,0 +1,240 @@
+{
+  "schema": "pifi.3d.final_classification_control.v0.1",
+  "date": "2026-10-06",
+  "branch": "agent/pifi-3d-final-classification-control-v01",
+  "status": "FINAL CONTROL PASS — FREEZE MATHEMATICAL BRANCH",
+  "execution": {
+    "mathematical_control": "executed independently in assistant runtime",
+    "github_actions_attempt": {
+      "run_id": 37503671127,
+      "conclusion": "failure",
+      "steps_started": 0,
+      "runner_id": 0,
+      "interpretation": "workflow did not start a runner; this is not counted as a mathematical test failure"
+    }
+  },
+  "scope": {
+    "new_parameters": false,
+    "purpose": "attempt to break the frozen graph -> macro -> refined component orbit -> affine/CRT chain"
+  },
+  "adversarial_full_graph_control": {
+    "q_groups": {
+      "small_anchor": [
+        2,
+        3,
+        4
+      ],
+      "prime_q": [
+        5,
+        7,
+        11,
+        13,
+        17,
+        19
+      ],
+      "prime_power_q": [
+        8,
+        9,
+        16,
+        25,
+        27
+      ],
+      "gcd_rich_q": [
+        6,
+        12,
+        18,
+        24,
+        30
+      ]
+    },
+    "full_graph_parameter_cases": 152,
+    "HT_plus_macro_cases": 152,
+    "coarse_full_graph_chirality_cases": 304,
+    "refined_full_graph_vs_component_orbit_cases_HT_plus": 152,
+    "refined_chirality_cases": 304,
+    "max_n": 120,
+    "forced_special_cases": {
+      "s_zero": 40,
+      "s_two": 21,
+      "s_half_turn": 20
+    },
+    "cases_by_group": {
+      "small_anchor": 24,
+      "prime_q": 48,
+      "prime_power_q": 40,
+      "gcd_rich_q": 40
+    },
+    "mismatches": {
+      "full_graph_vs_macro_theorem": 0,
+      "coarse_Q_period_kmin_census": 0,
+      "refined_full_graph_vs_component_orbit_signature": 0,
+      "refined_HT_plus_vs_HT_minus_Q_period_kmin": 0
+    }
+  },
+  "necessity_sufficiency": {
+    "CRT_signature_vs_diagonal_unit_orbit": {
+      "status": "NECESSARY AND SUFFICIENT",
+      "exhaustive_generic_n_range": [
+        2,
+        64
+      ],
+      "exhaustive_pairs": 146965,
+      "mismatches_both_directions": 0,
+      "additional_sampled_moduli": [
+        8,
+        12,
+        16,
+        20,
+        24,
+        28,
+        32,
+        36,
+        40,
+        48,
+        60,
+        64,
+        72,
+        80,
+        96,
+        100,
+        108,
+        120
+      ],
+      "additional_sampled_pair_checks": 4335,
+      "additional_mismatches": 0
+    },
+    "CRT_placement_class_to_component_colour_future": {
+      "status": "SUFFICIENT ON FINAL CONTROL SET",
+      "distinct_CRT_classes_in_control": 122,
+      "within_class_signature_splits": 0
+    },
+    "component_colour_future_to_CRT_class": {
+      "status": "NOT NECESSARY",
+      "cross_CRT_gauge_colour_language_collisions_in_control": 33,
+      "interpretation": "accidental/coarser language degeneracies exist after component-label renaming; CRT classifies affine placement, not every possible future-language coincidence"
+    }
+  },
+  "anchors": {
+    "original_PIFI": {
+      "parameters": {
+        "n": 12,
+        "delta": 1,
+        "c_AB": 1,
+        "c_BC": 1
+      },
+      "HT_plus": {
+        "Q_coarse": 52,
+        "Q_refined": 52,
+        "k_min": 13,
+        "periods": [
+          8,
+          12,
+          12,
+          20
+        ]
+      },
+      "HT_minus": {
+        "Q_coarse": 52,
+        "Q_refined": 52,
+        "k_min": 13,
+        "periods": [
+          8,
+          12,
+          12,
+          20
+        ]
+      }
+    },
+    "placement_counterexample": {
+      "n": 24,
+      "case_A": {
+        "triple": [
+          1,
+          7,
+          6
+        ],
+        "Q_comp": 192
+      },
+      "case_B": {
+        "triple": [
+          1,
+          5,
+          8
+        ],
+        "Q_comp": 312
+      }
+    },
+    "CRT_witnesses": {
+      "affine_equivalent": "(10,1) ~ (2,2) in Z_12 x Z_3",
+      "gcd_only_failure": "(10,1) !~ (2,1) despite same simple gcd data",
+      "prime_power_ratio": "(2,2) !~ (2,6) in Z_16 x Z_8"
+    }
+  },
+  "extended_arithmetic_control": {
+    "q_values": [
+      31,
+      32,
+      37,
+      41,
+      49,
+      60
+    ],
+    "max_n": 240,
+    "adversarial_cases": 144,
+    "mismatches": 0,
+    "per_q": [
+      {
+        "q": 31,
+        "n": 124,
+        "cases": 24,
+        "CRT_classes": 19
+      },
+      {
+        "q": 32,
+        "n": 128,
+        "cases": 24,
+        "CRT_classes": 18
+      },
+      {
+        "q": 37,
+        "n": 148,
+        "cases": 24,
+        "CRT_classes": 19
+      },
+      {
+        "q": 41,
+        "n": 164,
+        "cases": 24,
+        "CRT_classes": 19
+      },
+      {
+        "q": 49,
+        "n": 196,
+        "cases": 24,
+        "CRT_classes": 19
+      },
+      {
+        "q": 60,
+        "n": 240,
+        "cases": 24,
+        "CRT_classes": 19
+      }
+    ]
+  },
+  "final_claim_boundary": {
+    "proved_and_controlled": [
+      "split-annular macro law s=2(delta+c_AB+c_BC)",
+      "coarse future classification by A(q,s)",
+      "component-aware refined observation",
+      "exact 2n-state component-orbit predictor",
+      "finite affine placement taxonomy",
+      "CRT / prime-power necessity-and-sufficiency for diagonal unit orbits"
+    ],
+    "not_claimed": [
+      "CRT placement class is necessary for equality of all component-colour future languages",
+      "global novelty relative to literature before specialist audit",
+      "a universal physical interpretation of the arithmetic invariants"
+    ]
+  },
+  "recommendation": "FREEZE this mathematical branch and move to specialist novelty/control plus publication consolidation"
+}

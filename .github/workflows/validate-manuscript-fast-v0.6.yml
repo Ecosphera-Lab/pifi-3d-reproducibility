@@ -1,0 +1,41 @@
+name: Validate manuscript v0.6 fast
+
+on:
+  push:
+    branches:
+      - release/pifi-3d-family-v0.6
+    paths:
+      - 'paper/**'
+      - 'results/**'
+      - 'verify_release.py'
+      - '.github/workflows/validate-manuscript-fast-v0.6.yml'
+  workflow_dispatch:
+
+jobs:
+  manuscript:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Verify frozen result consistency
+        run: python verify_release.py
+
+      - name: Compile manuscript
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: paper
+          latexmk_use_xelatex: false
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Upload manuscript PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: pifi-3d-family-v0.6-fast-pdf
+          path: paper/main.pdf

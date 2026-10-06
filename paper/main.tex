@@ -1,0 +1,914 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,longtable}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\setlist{nosep}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\T}{\mathcal T}
+\newcommand{\A}{\mathcal A}
+\newcommand{\Ozero}{\mathcal O_0}
+\newcommand{\Ocomp}{\mathcal O_{\rm comp}}
+\newcommand{\Pcomp}{\mathcal P_{\rm comp}}
+\newcommand{\HTp}{\mathrm{HT}_{+}}
+\newcommand{\HTm}{\mathrm{HT}_{-}}
+
+\title{An Exactly Solvable Family of Routed Rotation Systems\\
+with Observation-Dependent Future Quotients}
+\author{Maks Katsubo\\Independent researcher}
+\date{Publication-grade consolidation v0.6 --- 6 October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We define an infinite family of finite routed rotation systems
+\[
+\T_{n;\delta,c_{AB},c_{BC}},\qquad n=4q\ge 8,
+\]
+obtained by a cyclic deformation of a geometry-derived PIFI routing template.
+The full system has \(7n-1\) vertices, \(16n\) undirected edges and \(32n\) directed edge states, but its non-radial dynamics admits an exact \(2n\)-state return reduction.
+The induced macro shift is
+\[
+s=2(\delta+c_{AB}+c_{BC})\pmod n,
+\]
+and, after reduction modulo \(q\), the return dynamics is a canonical two-layer arithmetic system \(\A(q,s)\).
+Writing \(g=\gcd(q,s)\) and \(m=q/g\), we obtain closed formulas for the coarse cycle census, primitive future periods, future-equivalence quotient size \(Q\), and resolving depth \(k_{\min}\).
+
+The original PIFI slice \((\delta,c_{AB},c_{BC})=(1,1,1)\) has \(s=6\); in that slice
+\[
+Q=52\iff n\in\{8,12,24\},
+\]
+and the original \(n=12\) system has \(Q=52\) and \(k_{\min}=13\).
+
+We then separate graph microstructure from observable future behavior.
+The AB- and BC-family restricted graphs carry component invariants \(h_{AB}\) and \(h_{BC}\), while the coarse future quotient depends only on \(s\).
+Refining the output alphabet by exact family-component labels yields an exact decorated-orbit formula
+\[
+Q_{\rm comp}
+=
+8+\sum_{[W]\in\Pcomp}|W|.
+\]
+The refined quotient depends on component placement, not merely on component counts.
+That placement admits the normal form
+\[
+(n,s,d_{AB},d_{BC},\rho),\qquad \rho=c_{BC}\bmod d_{AB},
+\]
+and, modulo an affine index gauge, the remaining datum is the diagonal unit orbit
+\(
+[(s,\rho)]_{U(n)}.
+\)
+Finally, this orbit is classified prime by prime by truncated \(p\)-adic valuations and a relative unit ratio on the common nonzero prime-power layer.
+
+The general machinery---rotation systems, follower/future equivalence, cyclic words, affine actions and CRT---is standard.
+The candidate contribution is the exact solvability and end-to-end arithmetic classification of the explicit routed family defined here.
+\end{abstract}
+
+\medskip
+\noindent\textbf{Keywords:}
+rotation systems; symbolic dynamics; future equivalence; cyclic words; affine actions; Chinese remainder theorem; computational combinatorics.
+
+\section{Introduction}
+
+Finite graph dynamics often becomes much smaller after one passes from the full state space to an induced return system or to an output-equivalence quotient.
+The general principles behind such reductions are classical: combinatorial maps encode cyclic port order on darts, transition systems specify local continuation rules, and follower or right-language equivalence identifies states with the same future output sequence
+\cite{Moore1956,LindMarcus2021,Johansen2011}.
+Likewise, cyclic lifts and arithmetic orbit decompositions naturally produce gcd and order phenomena
+\cite{GrossTucker1977,HubardMochanMontero2023}.
+
+This paper studies one explicit family for which all of those layers can be calculated exactly.
+The family originates from a fixed PIFI geometric template, but the main statements below are purely finite and combinatorial.
+The geometric motivation singles out the original point
+\[
+n=12,\qquad
+(\delta,c_{AB},c_{BC})=(1,1,1),
+\]
+where a previously observed future quotient has \(52\) states.
+Rather than treating \(52\) as an isolated numerical phenomenon, we place that point inside an infinite arithmetic family.
+
+The logical chain is
+\[
+(\delta,c_{AB},c_{BC})
+\longrightarrow
+s
+\longrightarrow
+\A(q,s)
+\longrightarrow
+(Q,k_{\min},\text{cycle census}),
+\]
+followed by
+\[
+\text{component labels}
+\longrightarrow
+\text{decorated macro orbits}
+\longrightarrow
+\text{affine placement}
+\longrightarrow
+\text{prime-power CRT data}.
+\]
+
+\subsection{Claim boundary}
+
+No new theory of combinatorial maps, automata minimization, sofic covers, voltage graphs, primitive necklaces, affine permutations, finite abelian groups, or the Chinese remainder theorem is claimed.
+Those frameworks are established
+\cite{LindMarcus2021,Johansen2011,GrossTucker1977,HubardMochanMontero2023,BorsWang2022,DuttaPrasad2011,Cao2011}.
+The novelty candidate is restricted to the exactly solvable family defined below, its explicit reductions, and their combined classification.
+
+A targeted prior-art audit did not locate the complete theorem chain presented here.
+This is evidence for a family-specific novelty candidate, not a proof of publication priority.
+
+\section{The routed rotation-system family}\label{sec:def}
+
+Fix
+\[
+n=4q,\qquad q\ge2,
+\]
+and read every index modulo \(n\).
+The parameters satisfy
+\[
+\delta\not\equiv0,\qquad
+c_{AB}\not\equiv0,\qquad
+c_{BC}\not\equiv0,\frac n2
+\pmod n.
+\]
+
+\begin{definition}[Underlying labelled graph]
+Before seam identification the vertices are
+\[
+\{O\}\cup
+\{A_i,B_i,C_i,X_i,Y_i,Z_i,W_i:i\in\ZZ_n\}.
+\]
+Impose
+\[
+C_0\sim C_{2q}=:D_x,\qquad
+C_q\sim C_{3q}=:D_y.
+\]
+The five edge families are
+\begin{align*}
+OA:\;& OX_i,\ X_iA_i,\\
+AA:\;& A_iY_i,\ X_iY_i,\ A_iY_{i-\delta},\ X_iY_{i-\delta},\\
+AB:\;& A_iZ_i,\ A_{i+c_{AB}}Z_i,\ Z_iB_i,\ Z_iB_{i+c_{AB}},\\
+AC:\;& A_iB_i,\ B_iC_i,\\
+BC:\;& B_iW_i,\ B_{i+c_{BC}}W_i,\ W_iC_i,\ W_iC_{i+c_{BC}}.
+\end{align*}
+\end{definition}
+
+\begin{proposition}[Graph counts]\label{prop:counts}
+Every admissible system has
+\[
+\boxed{V=7n-1},\qquad
+\boxed{E=16n},\qquad
+\boxed{|D|=32n},
+\]
+where \(D\) is the dart set, and degree histogram
+\[
+\boxed{
+(n-4)d_3+4n\,d_4+(2n+2)d_6+d_n.
+}
+\]
+\end{proposition}
+
+\begin{proof}
+Before the seam quotient there are \(7n+1\) vertices; the two independent identifications reduce the count by two.
+The five edge families contribute \(2n+4n+4n+2n+4n=16n\) edges.
+The degree count follows directly from the incidence table.
+\end{proof}
+
+\subsection{Rotation data and routing}
+
+The cyclic port order is part of the definition:
+\[
+\begin{array}{c|l}
+\text{vertex} & \text{cyclic neighbor order}\\
+\hline
+O & X_0,X_1,\ldots,X_{n-1}\\
+X_i & Y_{i-\delta},O,Y_i,A_i\\
+Y_i & X_i,X_{i+\delta},A_{i+\delta},A_i\\
+Z_i & A_i,A_{i+c_{AB}},B_{i+c_{AB}},B_i\\
+W_i & B_i,B_{i+c_{BC}},C_{i+c_{BC}},C_i\\
+A_i & Y_{i-\delta},Z_{i-c_{AB}},B_i,Z_i,Y_i,X_i\\
+B_i & Z_{i-c_{AB}},A_i,Z_i,W_i,C_i,W_{i-c_{BC}}.
+\end{array}
+\]
+For non-cardinal \(C_i\),
+\[
+C_i:\quad B_i,W_i,W_{i-c_{BC}}.
+\]
+At the two seam vertices:
+\begin{align*}
+D_x:\;&B_0,W_0,W_{-c_{BC}},B_{2q},W_{2q},W_{2q-c_{BC}},\\
+D_y:\;&B_q,W_q,W_{q-c_{BC}},B_{3q},W_{3q},W_{3q-c_{BC}}.
+\end{align*}
+
+At every even-degree vertex, an incoming dart leaves by the opposite port.
+At every degree-three vertex, choose the next port in one cyclic direction for \(\HTp\) and the previous port for \(\HTm\).
+This defines a permutation
+\[
+P:D\to D.
+\]
+
+\begin{definition}[Coarse observation]
+For a dart \(d:u\to v\) belonging to family \(F\), define
+\[
+\Ozero(d)=(F,\deg u,\deg v).
+\]
+Two darts are future-equivalent when
+\[
+d\sim_\infty d'
+\quad\Longleftrightarrow\quad
+\Ozero(P^t d)=\Ozero(P^t d')
+\ \text{for every }t\ge0.
+\]
+Let \(Q\) be the number of equivalence classes.
+The resolving depth \(k_{\min}\) is the least \(k\) for which equality of the first \(k\) observed symbols determines the complete future class.
+\end{definition}
+
+\section{Exact macro reduction}\label{sec:macro}
+
+The non-radial dynamics is captured by
+\[
+\boxed{L_j=W_j\to B_j},
+\qquad
+\boxed{R_j=W_j\to B_{j+c_{BC}}}.
+\]
+Let
+\[
+S=\{0,q,2q,3q\}\subset\ZZ_n.
+\]
+
+\begin{theorem}[Macro-shift theorem]\label{thm:macro}
+Define
+\[
+\boxed{s=2(\delta+c_{AB}+c_{BC})\pmod n.}
+\]
+For \(\HTp\),
+\[
+L_j\longmapsto
+\begin{cases}
+R_{j+n/2-(s-c_{BC})},&j-(s-c_{BC})\in S,\\
+L_{j-s},&j-(s-c_{BC})\notin S,
+\end{cases}
+\]
+and
+\[
+R_j\longmapsto
+\begin{cases}
+L_{j+n/2+s-c_{BC}},&j+s\in S,\\
+R_{j+n/2+s},&j+s\notin S.
+\end{cases}
+\]
+The output-block lengths are \(12\) on regular \(L\)-frames, \(20\) on regular \(R\)-frames, and \(12\) on seam-switch frames.
+\end{theorem}
+
+\begin{proof}
+Trace an \(L_j\) or \(R_j\) entry through the fixed local rotation table.
+The AA, AB and BC offsets contribute twice to the complete frame displacement, giving \(2(\delta+c_{AB}+c_{BC})\).
+The only layer switches occur when the trace hits one of the identified cardinal \(C\)-positions.
+The intermediate local degrees and edge families are fixed, hence so are the frame lengths.
+\end{proof}
+
+Set
+\[
+x=j-(s-c_{BC})\quad\text{on }L,
+\qquad
+y=j+s\quad\text{on }R.
+\]
+Modulo \(q\), the four cardinal indices become \(0\).
+
+\begin{definition}[Canonical arithmetic return system]
+Let \(\A(q,s)\) be the permutation of
+\(
+\{L_x,R_y:x,y\in\ZZ_q\}
+\)
+defined by
+\[
+L_0\mapsto R_s,\qquad
+L_x\mapsto L_{x-s}\ (x\ne0),
+\]
+\[
+R_0\mapsto L_{-s},\qquad
+R_y\mapsto R_{y+s}\ (y\ne0).
+\]
+\end{definition}
+
+\begin{corollary}[Canonical reduction]\label{cor:Aqs}
+The non-radial routed dynamics of
+\(
+\T_{n;\delta,c_{AB},c_{BC}}
+\)
+reduces exactly to \(\A(q,s)\).
+Therefore all coarse future invariants depend on the three wiring parameters only through \(s\).
+\end{corollary}
+
+\section{Coarse arithmetic classification}\label{sec:coarse}
+
+Set
+\[
+\boxed{g=\gcd(q,s),\qquad m=\frac qg.}
+\]
+The mixed core word is
+\[
+\boxed{C6\,C20^{\,m-1}\,C6\,C3^{\,m-1}.}
+\]
+
+\begin{theorem}[Primitive future classes]\label{thm:future}
+The primitive coarse future periods are
+\[
+\begin{cases}
+8,\ 32m-8,&g=1,\\[1mm]
+8,\ 12,\ 12,\ 20,&m=1,\\[1mm]
+8,\ 12,\ 20,\ 32m-8,&g>1,\ m>1.
+\end{cases}
+\]
+Consequently
+\[
+\boxed{
+Q=
+\begin{cases}
+32q,&g=1,\\[1mm]
+52,&m=1,\\[1mm]
+32(m+1),&g>1,\ m>1.
+\end{cases}}
+\]
+\end{theorem}
+
+\begin{proof}
+Away from the seam the two layers are translations by \(-s\) and \(+s\) modulo \(q\), with orbit length \(m=q/g\).
+A mixed orbit meets the seam twice and traverses one \(C6\), then \(m-1\) \(C20\)-frames, another \(C6\), and \(m-1\) \(C3\)-frames.
+Its primitive output length is
+\[
+12+20(m-1)+12+12(m-1)=32m-8.
+\]
+The three cases follow from whether pure translation orbits avoiding the seam exist.
+Summing distinct primitive periods gives \(Q\).
+\end{proof}
+
+\begin{theorem}[Resolving depth]\label{thm:kmin}
+The exact resolving depth is
+\[
+\boxed{
+k_{\min}=
+\begin{cases}
+13,&m=1,\\
+25,&g=1,\ m=2,\\
+20m-29,&g=1,\ m\ge3,\\
+20m-9,&g>1,\ m>1.
+\end{cases}}
+\]
+\end{theorem}
+
+This is the maximal common-prefix length among distinct cyclic phases of the primitive periodic futures, plus one.
+
+For the full routed cycle census let
+\[
+d_L=\gcd(n,s),\qquad
+d_R=\gcd(n,n/2+s).
+\]
+Then
+\[
+N_{C3}=d_L-\frac{d_L}{\gcd(d_L,q)},
+\qquad
+L_{C3}=12\frac n{d_L},
+\]
+\[
+N_{C20}=d_R-\frac{d_R}{\gcd(d_R,q)},
+\qquad
+L_{C20}=20\frac n{d_R},
+\]
+and
+\[
+N_M=
+\begin{cases}
+4,&m\text{ odd},\\
+2,&m\text{ even},
+\end{cases}
+\qquad
+L_M=
+\begin{cases}
+32m-8,&m\text{ odd},\\
+2(32m-8),&m\text{ even}.
+\end{cases}
+\]
+Four radial \(U\)-cycles of length \(8\) are always present.
+
+\section{The original PIFI slice}\label{sec:pifi}
+
+The geometry-derived wiring has
+\[
+\boxed{(\delta,c_{AB},c_{BC})=(1,1,1),}
+\]
+so
+\[
+\boxed{s=6.}
+\]
+
+\begin{corollary}[The 52-state exceptional set]\label{cor:52}
+Along this wiring slice,
+\[
+\boxed{
+Q=52
+\iff
+q\mid6
+\iff
+n\in\{8,12,24\}.
+}
+\]
+For the original \(n=12\) system,
+\[
+\boxed{Q=52,\qquad k_{\min}=13,}
+\]
+with primitive periods
+\[
+\boxed{8,\ 12,\ 12,\ 20.}
+\]
+\end{corollary}
+
+\section{Information loss under the coarse observation}\label{sec:loss}
+
+\begin{proposition}[AB component invariant]\label{prop:hAB}
+The AB-only subgraph has
+\[
+\boxed{h_{AB}=\gcd(n,c_{AB})}
+\]
+connected components.
+\end{proposition}
+
+\begin{proof}
+AB incidence changes the cyclic index only by multiples of \(c_{AB}\), hence connected components are cosets of the subgroup generated by \(c_{AB}\) in \(\ZZ_n\).
+\end{proof}
+
+Set
+\[
+d_{BC}=\gcd(n,c_{BC}).
+\]
+
+\begin{proposition}[BC component invariant]\label{prop:hBC}
+After the two cardinal \(C\)-identifications, the BC-only subgraph has
+\[
+\boxed{
+h_{BC}=
+\begin{cases}
+d_{BC},&d_{BC}\mid n/2,\\
+d_{BC}-2,&d_{BC}\nmid n/2.
+\end{cases}}
+\]
+\end{proposition}
+
+\begin{proposition}[Explicit many-to-one coarse quotient]\label{prop:manytoone}
+At \(n=12\), the four triples
+\[
+(1,1,1),\quad
+(1,3,5),\quad
+(1,5,3),\quad
+(1,4,4)
+\]
+all have
+\[
+s=6,\qquad Q=52,\qquad k_{\min}=13,
+\]
+but respectively
+\[
+(h_{AB},h_{BC})
+=
+(1,1),\ (3,1),\ (1,3),\ (4,2).
+\]
+\end{proposition}
+
+Thus the coarse output alphabet forgets genuine labelled-graph microstructure.
+
+\section{Refined observation and component-decorated orbits}\label{sec:refined}
+
+Define
+\[
+d_{AB}=\gcd(n,c_{AB}),
+\qquad
+\alpha(i)=i\bmod d_{AB}.
+\]
+For BC, start with residues modulo
+\(
+d_{BC}
+\)
+and impose the two quotient relations induced by
+\[
+0\sim n/2,\qquad q\sim3q.
+\]
+Let
+\[
+\kappa:\ZZ_{d_{BC}}\to\mathcal C_{BC}
+\]
+be the resulting component map.
+
+\begin{definition}[Component-aware observation]
+For an AB dart belonging to the \(Z_i\)-cell, refine \(\Ozero\) by \(\alpha(i)\).
+For a BC dart belonging to the \(W_i\)-cell, refine \(\Ozero\) by \(\kappa(i)\).
+All other symbols remain unchanged.
+Call the refined observation \(\Ocomp\) and its quotient size \(Q_{\rm comp}\).
+\end{definition}
+
+At the original PIFI point
+\(
+h_{AB}=h_{BC}=1
+\),
+hence the added labels are trivial.
+
+\begin{corollary}[PIFI robustness]
+For the original \(n=12\) PIFI system,
+\[
+\boxed{Q_{\rm comp}=Q=52,}
+\]
+with
+\[
+k_{\min}=13,\qquad
+8,12,12,20.
+\]
+\end{corollary}
+
+For the four \(n=12,s=6\) examples from Proposition~\ref{prop:manytoone}, the refined sizes are
+\[
+52,\ 96,\ 84,\ 184.
+\]
+
+Use the macro gauge
+\[
+x=j-(s-c_{BC})\quad\text{on }L,
+\qquad
+y=j+s\quad\text{on }R,
+\]
+and put
+\[
+\boxed{\rho=c_{BC}\bmod d_{AB}.}
+\]
+Then the AB component labels inside a frame are
+\[
+L_x:\quad x+s-\rho,\ x+\rho\pmod{d_{AB}},
+\]
+\[
+R_y:\quad y-s+\rho,\ y-\rho\pmod{d_{AB}}.
+\]
+The BC labels are
+\[
+L/C3:\quad \kappa(x),\kappa(x),
+\]
+\[
+L/C6:\quad \kappa(x),\kappa(x+n/2),
+\]
+\[
+R/C20\text{ or }C6:\quad \kappa(y),\kappa(y+n/2).
+\]
+
+Let \(\beta(z)\) be the corresponding decorated output block at macro state \(z\).
+
+\begin{theorem}[Component-orbit formula]\label{thm:componentorbit}
+Let \(\Omega\) be the cycles of the exact \(2n\)-state macro permutation.
+For
+\[
+C=(z_0,\ldots,z_{\ell-1})\in\Omega
+\]
+form
+\[
+W_C=\beta(z_0)\beta(z_1)\cdots\beta(z_{\ell-1}).
+\]
+Let \(\Pcomp\) be the distinct cyclic classes of the primitive roots
+\(
+\operatorname{prim}(W_C)
+\).
+Then
+\[
+\boxed{
+Q_{\rm comp}
+=
+8+\sum_{[W]\in\Pcomp}|W|.
+}
+\]
+\end{theorem}
+
+\begin{proof}
+The radial sector contributes one primitive class of length \(8\).
+Every non-radial orbit returns to a macro entry and emits exactly the concatenated word \(W_C\).
+Two periodic futures are equivalent precisely when their primitive decorated words agree up to cyclic phase.
+\end{proof}
+
+Examples include
+\[
+52=8+12+12+20,
+\]
+\[
+84=8+12+12+12+20+20,
+\]
+\[
+96=8+12+12+20+20+24,
+\]
+\[
+184=8+4\cdot12+4\cdot20+2\cdot24.
+\]
+
+\begin{proposition}[Counts alone are insufficient]\label{prop:192312}
+There is no formula
+\[
+Q_{\rm comp}=F(n,s,h_{AB},h_{BC})
+\]
+for this refined observation.
+At \(n=24\), the systems
+\[
+(1,7,6)
+\quad\text{and}\quad
+(1,5,8)
+\]
+both have
+\[
+s=4,\qquad(h_{AB},h_{BC})=(1,6),
+\]
+but
+\[
+\boxed{Q_{\rm comp}=192}
+\qquad\text{and}\qquad
+\boxed{Q_{\rm comp}=312}.
+\]
+\end{proposition}
+
+\section{Affine placement normal form}\label{sec:placement}
+
+\begin{theorem}[Raw placement normal form]\label{thm:rawplacement}
+Up to component-label renaming, the component-labelled macro system is determined by
+\[
+\boxed{
+\Pi_0=(n,s,d_{AB},d_{BC},\rho).
+}
+\]
+\end{theorem}
+
+The cardinal seam set is preserved by affine index relabellings
+\[
+j\mapsto uj+t\pmod n,
+\]
+where \(u\in U(n)\) and \(t\in\{0,q,2q,3q\}\).
+After component-label renaming, \(t\) is immaterial, while
+\[
+(s,\rho)\mapsto
+(us\bmod n,u\rho\bmod d_{AB}).
+\]
+
+\begin{theorem}[Affine placement class]\label{thm:affine}
+The affine-gauge placement class is
+\[
+\boxed{
+\Theta=
+\left(
+n,d_{AB},d_{BC},[(s,\rho)]_{U(n)}
+\right).
+}
+\]
+Equivalently, with
+\[
+\epsilon_{BC}=
+\begin{cases}
+1,&d_{BC}\mid n/2,\\
+0,&d_{BC}\nmid n/2,
+\end{cases}
+\]
+one may write
+\[
+\Theta=
+\left(
+n,h_{AB},h_{BC},\epsilon_{BC},[(s,\rho)]_{U(n)}
+\right).
+\]
+\end{theorem}
+
+Pure gcd data do not classify the pair \((s,\rho)\): the coupled residue orbit is essential.
+
+\section{Prime-power CRT classification}\label{sec:crt}
+
+Let
+\[
+d=d_{AB},
+\qquad
+n=\prod_p p^{e_p},
+\qquad
+d=\prod_p p^{f_p}.
+\]
+For each prime \(p\mid n\), define
+\[
+\boxed{a_p=\min(v_p(s),e_p),}
+\qquad
+\boxed{b_p=\min(v_p(\rho),f_p).}
+\]
+If
+\[
+a_p<e_p,\qquad b_p<f_p,
+\]
+set
+\[
+\boxed{m_p=\min(e_p-a_p,f_p-b_p)}
+\]
+and
+\[
+\boxed{
+r_p=
+\left(\frac{\rho}{p^{b_p}}\right)
+\left(\frac{s}{p^{a_p}}\right)^{-1}
+\pmod{p^{m_p}}.
+}
+\]
+If either local coordinate vanishes, set \(m_p=0\) and omit \(r_p\).
+
+\begin{theorem}[Prime-power classification]\label{thm:crt}
+Two pairs
+\[
+(s,\rho),(s',\rho')\in\ZZ_n\times\ZZ_d
+\]
+lie in the same diagonal \(U(n)\)-orbit if and only if, for every \(p\mid n\),
+\[
+\boxed{
+(a_p,b_p,m_p,r_p)
+=
+(a'_p,b'_p,m'_p,r'_p).
+}
+\]
+No exceptional \(p=2\) case is required.
+\end{theorem}
+
+\begin{proof}
+A unit preserves the truncated valuations and cancels in the relative unit ratio, proving necessity.
+For sufficiency, after removing the fixed powers of \(p\), a common multiplier must satisfy
+\[
+u\equiv s'_0s_0^{-1}\pmod{p^{e_p-a_p}},
+\qquad
+u\equiv \rho'_0\rho_0^{-1}\pmod{p^{f_p-b_p}}.
+\]
+These congruences are compatible exactly modulo
+\(
+p^{m_p}
+\),
+and equality of \(r_p\) is precisely the compatibility condition.
+A local unit therefore exists for every prime, and CRT combines them into one \(u\in U(n)\).
+\end{proof}
+
+Hence the final arithmetic placement signature is
+\[
+\boxed{
+\Theta_{\rm CRT}
+=
+\left(
+n,d_{AB},d_{BC},
+\{(a_p,b_p,m_p,r_p)\}_{p\mid n}
+\right).
+}
+\]
+
+This is an elementary specialization of standard \(p\)-primary orbit ideas for finite abelian groups and finite chain rings
+\cite{DuttaPrasad2011,Cao2011}; no new general orbit theory is claimed.
+
+\section{Final logical boundary and controls}\label{sec:boundary}
+
+The CRT signature is necessary and sufficient for the diagonal affine placement orbit:
+\[
+\boxed{
+\Theta_{\rm CRT}=\Theta'_{\rm CRT}
+\iff
+[(s,\rho)]_{U(n)}
+=
+[(s',\rho')]_{U(n)}.
+}
+\]
+
+The component-colour future language can be coarser.
+Final controls found distinct CRT placement classes with identical component-colour future languages after component-label renaming.
+Therefore the valid implication is
+\[
+\boxed{
+\text{same CRT placement class}
+\Longrightarrow
+\text{same component-colour future language},
+}
+\]
+but not generally the converse.
+
+\begin{table}[h]
+\centering
+\caption{Final control summary.}
+\begin{tabular}{lrr}
+\toprule
+control & cases & mismatches\\
+\midrule
+full graph HT+ vs.\ macro theorem & 152 & 0\\
+coarse full graph, both chiralities & 304 & 0\\
+refined full graph vs.\ component-orbit predictor & 152 & 0\\
+refined HT+/HT- quotient invariants & 304 & 0\\
+generic CRT pair theorem, \(2\le n\le64\) & 146965 & 0\\
+larger-modulus CRT samples & 4335 & 0\\
+extended adversarial placement cases, \(n\le240\) & 144 & 0\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+These computations guard against implementation errors and certify finite instances.
+They do not establish publication priority.
+
+\section{Discussion}
+
+The main result is not the isolated value \(52\).
+The stronger statement is that a \(32n\)-dart routed family collapses to a two-layer arithmetic return system whose coarse future quotient is governed by one shift \(s\), while controlled observation refinement exposes additional component-placement information.
+
+The original PIFI point is robust in one precise sense:
+its AB and BC restricted graphs are connected, so component refinement adds no information and leaves
+\[
+Q=52.
+\]
+Deformed systems with the same coarse quotient can expand to
+\[
+84,\ 96,\ 184,\ 192,\ 248,\ 312,\ldots
+\]
+under the refined observation.
+
+The resulting hierarchy is
+\[
+\boxed{
+\text{routed graph}
+\to
+\text{macro return}
+\to
+\text{coarse future quotient}
+\to
+\text{refined decorated orbits}
+\to
+\text{affine placement}
+\to
+\text{CRT data}.
+}
+\]
+
+Rotation systems, future/follower equivalence, cyclic-word reduction, affine actions and \(p\)-primary decomposition are established tools
+\cite{LindMarcus2021,Johansen2011,GrossTucker1977,BorsWang2022,DuttaPrasad2011,Cao2011}.
+The candidate contribution is their exact synthesis for the explicit family \(\T_{n;\delta,c_{AB},c_{BC}}\).
+
+\section{Reproducibility}
+
+All theorem-level claims are accompanied by exact Python verifiers and machine-readable JSON certificates.
+The publication package freezes the chain:
+
+\begin{enumerate}
+\item split-annular graph and macro theorem;
+\item refined terminal injectivity;
+\item component-orbit predictor;
+\item affine placement classification;
+\item CRT prime-power classifier;
+\item final necessity/sufficiency control;
+\item specialist novelty/claim-boundary audit.
+\end{enumerate}
+
+A public snapshot should export only the manuscript, these frozen verifiers and recursive local dependencies, the corresponding result certificates, and the claim-boundary documents.
+
+\appendix
+
+\section{Evidence map}
+
+\footnotesize
+\begin{longtable}{p{0.31\textwidth}p{0.31\textwidth}p{0.31\textwidth}}
+\toprule
+claim & result certificate & verifier / document\\
+\midrule
+split-annular macro theorem &
+\path{docs/results/pifi_3d_tn_split_annular_offset_v0_1.json} &
+\path{tools/verify_pifi_3d_tn_split_annular_offset_v0_1.py}\\
+refined observation / injectivity &
+\path{docs/results/pifi_3d_refined_terminal_injectivity_v0_1.json} &
+\path{tools/verify_pifi_3d_refined_terminal_injectivity_v0_1.py}\\
+component-orbit formula &
+\path{docs/results/pifi_3d_refined_quotient_component_orbit_v0_1.json} &
+\path{tools/verify_pifi_3d_refined_quotient_component_orbit_v0_1.py}\\
+affine placement normal form &
+\path{docs/results/pifi_3d_component_placement_affine_gauge_v0_1.json} &
+\path{tools/verify_pifi_3d_component_placement_affine_gauge_v0_1.py}\\
+CRT prime-power theorem &
+\path{docs/results/pifi_3d_crt_prime_power_placement_v0_1.json} &
+\path{tools/verify_pifi_3d_crt_prime_power_placement_v0_1.py}\\
+final control &
+\path{docs/results/pifi_3d_final_classification_control_v0_1.json} &
+\path{tools/verify_pifi_3d_final_classification_control_v0_1.py}\\
+novelty boundary &
+\path{docs/results/pifi_3d_specialist_novelty_literature_audit_v0_1.json} &
+\path{docs/research/pifi_2d_square_ca/PIFI_3D_SPECIALIST_NOVELTY_LITERATURE_AUDIT_v0_1.md}\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,180 @@
+{
+  "schema": "pifi.3d.refined_terminal_injectivity.v0.1",
+  "date": "2026-10-06",
+  "branch": "agent/pifi-3d-refined-terminal-injectivity-v01",
+  "status": "STRONG PASS — COMPONENT-AWARE QUOTIENT RECOVERS LOST MICROSTRUCTURE",
+  "observation_lattice": {
+    "O0": "edge family | degree(tail) | degree(head)",
+    "O_AB": "O0 + exact AB component id on AB darts",
+    "O_BC": "O0 + exact BC component id on BC darts",
+    "O_bin": "O0 + one bit on AB/BC darts: canonical component zero vs nonzero",
+    "O_comp": "O0 + exact canonical AB/BC component id"
+  },
+  "component_information": {
+    "AB_fixed_width_bits": "ceil(log2(h_AB)), with 0 bits when h_AB=1",
+    "BC_fixed_width_bits": "ceil(log2(h_BC)), with 0 bits when h_BC=1",
+    "scope": "minimum fixed-width encoding for the component-id fields themselves; not a proof of globally minimal observation alphabet"
+  },
+  "minimality_status": {
+    "AB_only": "FAIL — cannot recover h_BC",
+    "BC_only": "FAIL — cannot recover h_AB",
+    "one_bit_both": "FAIL — explicit n=16 collision",
+    "exact_component_both": "PASS in exhaustive tested range",
+    "claim_boundary": "O_comp is the first successful refinement in the frozen natural refinement lattice; absolute bit-minimality among all conceivable alphabets is not claimed."
+  },
+  "witnesses_n12_s6": [
+    {
+      "delta": 1,
+      "c_AB": 1,
+      "c_BC": 1,
+      "h_AB": 1,
+      "h_BC": 1,
+      "Q_coarse": 52,
+      "Q_component": 52,
+      "k_min_component": 13,
+      "periods_component": [8, 12, 12, 20],
+      "component_bits_AB": 0,
+      "component_bits_BC": 0
+    },
+    {
+      "delta": 1,
+      "c_AB": 3,
+      "c_BC": 5,
+      "h_AB": 3,
+      "h_BC": 1,
+      "Q_coarse": 52,
+      "Q_component": 96,
+      "k_min_component": 13,
+      "periods_component": [8, 12, 12, 20, 20, 24],
+      "component_bits_AB": 2,
+      "component_bits_BC": 0
+    },
+    {
+      "delta": 1,
+      "c_AB": 5,
+      "c_BC": 3,
+      "h_AB": 1,
+      "h_BC": 3,
+      "Q_coarse": 52,
+      "Q_component": 84,
+      "k_min_component": 13,
+      "periods_component": [8, 12, 12, 12, 20, 20],
+      "component_bits_AB": 0,
+      "component_bits_BC": 2
+    },
+    {
+      "delta": 1,
+      "c_AB": 4,
+      "c_BC": 4,
+      "h_AB": 4,
+      "h_BC": 2,
+      "Q_coarse": 52,
+      "Q_component": 184,
+      "k_min_component": 13,
+      "periods_component": [8, 12, 12, 12, 12, 20, 20, 20, 20, 24, 24],
+      "component_bits_AB": 2,
+      "component_bits_BC": 1
+    }
+  ],
+  "binary_counterexample": {
+    "n": 16,
+    "s": 8,
+    "case_A": {
+      "delta": 1,
+      "c_AB": 4,
+      "c_BC": 7,
+      "h_AB": 4,
+      "h_BC": 1,
+      "Q_coarse": 52,
+      "Q_binary": 116,
+      "k_min_binary": 19,
+      "Q_exact_component": 128
+    },
+    "case_B": {
+      "delta": 1,
+      "c_AB": 8,
+      "c_BC": 3,
+      "h_AB": 8,
+      "h_BC": 1,
+      "Q_coarse": 52,
+      "Q_binary": 116,
+      "k_min_binary": 19,
+      "Q_exact_component": 248
+    },
+    "binary_future_signatures_equal": true,
+    "exact_component_future_signatures_equal": false
+  },
+  "exhaustive_injectivity": {
+    "q_range": [2, 6],
+    "triples": 22790,
+    "cross_h_pair_signature_collisions": 0,
+    "same_h_pair_multiple_signature_classes": 296,
+    "per_n": {
+      "8": {
+        "triples": 294,
+        "cross_h_pair_signature_collisions": 0,
+        "same_h_pair_multiple_signature_classes": 0
+      },
+      "12": {
+        "triples": 1210,
+        "cross_h_pair_signature_collisions": 0,
+        "same_h_pair_multiple_signature_classes": 24
+      },
+      "16": {
+        "triples": 3150,
+        "cross_h_pair_signature_collisions": 0,
+        "same_h_pair_multiple_signature_classes": 16
+      },
+      "20": {
+        "triples": 6498,
+        "cross_h_pair_signature_collisions": 0,
+        "same_h_pair_multiple_signature_classes": 40
+      },
+      "24": {
+        "triples": 11638,
+        "cross_h_pair_signature_collisions": 0,
+        "same_h_pair_multiple_signature_classes": 216
+      }
+    }
+  },
+  "representative_chirality": {
+    "q_range": [2, 8],
+    "representative_key": "(q,s,h_AB,h_BC)",
+    "representative_classes": 1310,
+    "chirality_cases": 2620,
+    "Q_period_kmin_chirality_mismatches": 0,
+    "cross_h_pair_signature_collisions_HT_plus": 0
+  },
+  "original_PIFI": {
+    "parameters": {
+      "n": 12,
+      "delta": 1,
+      "c_AB": 1,
+      "c_BC": 1,
+      "h_AB": 1,
+      "h_BC": 1
+    },
+    "HT_plus": {
+      "Q_coarse": 52,
+      "Q_refined": 52,
+      "k_min": 13,
+      "periods": [8, 12, 12, 20]
+    },
+    "HT_minus": {
+      "Q_coarse": 52,
+      "Q_refined": 52,
+      "k_min": 13,
+      "periods": [8, 12, 12, 20]
+    },
+    "interpretation": "The component refinement adds zero effective information at the original PIFI point because both annular family subgraphs are connected."
+  },
+  "main_conclusions": [
+    "The coarse quotient is provably many-to-one over genuine graph microstructure.",
+    "Both family component markers are necessary in the tested natural refinement lattice.",
+    "A one-bit zero/nonzero component marker is insufficient in general.",
+    "Exact AB+BC component ids are sufficient to recover (h_AB,h_BC) at fixed (n,s) across every tested triple q=2..6.",
+    "The original PIFI Q=52 survives the successful refinement unchanged.",
+    "Therefore the original 52 is not caused merely by forgetting nontrivial h_AB/h_BC structure; at the PIFI point h_AB=h_BC=1."
+  ],
+  "next_gate": "Observation-refinement theorem/generalization: derive closed-form Q_ref from component orbit structure, rather than only computing it case-by-case."
+}

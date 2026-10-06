@@ -1,2 +1,2 @@
-sympy
-networkx
+# PIFI-3D family classification v0.6
+# Frozen Python verifier chain uses only the Python standard library.

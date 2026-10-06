@@ -1,0 +1,146 @@
+{
+  "schema": "pifi.3d.tn_split_annular_offset.v0.1",
+  "date": "2026-10-06",
+  "branch": "agent/pifi-3d-tn-split-annular-offset-v01",
+  "status": "STRONG PASS — SPLIT AB/BC OFFSETS STILL COLLAPSE MACROSCOPICALLY",
+  "family": {
+    "name": "T_{n;delta,c_AB,c_BC}",
+    "n": "4q",
+    "q_min": 2,
+    "AA": "A_i,X_i ~ Y_i,Y_{i-delta}",
+    "AB": "Z_i ~ A_i,A_{i+c_AB},B_i,B_{i+c_AB}",
+    "BC": "W_i ~ B_i,B_{i+c_BC},C_i,C_{i+c_BC}",
+    "admissibility": [
+      "delta != 0 mod n",
+      "c_AB != 0 mod n",
+      "c_BC != 0 mod n",
+      "c_BC != n/2 mod n"
+    ],
+    "original_PIFI": {
+      "delta": 1,
+      "c_AB": 1,
+      "c_BC": 1
+    }
+  },
+  "macro_theorem": {
+    "lambda": "delta+c_AB+c_BC mod n/2",
+    "s": "2(delta+c_AB+c_BC) mod n",
+    "frame_entries": {
+      "L_j": "W_j -> B_j",
+      "R_j": "W_j -> B_{j+c_BC}"
+    },
+    "HT_plus": {
+      "L_regular": "L_j -> L_{j-s}, core C3",
+      "L_seam_condition": "j-(s-c_BC) in {0,q,2q,3q}",
+      "L_seam": "L_j -> R_{j+n/2-(s-c_BC)}, core C6",
+      "R_regular": "R_j -> R_{j+n/2+s}, core C20",
+      "R_seam_condition": "j+s in {0,q,2q,3q}",
+      "R_seam": "R_j -> L_{j+n/2+s-c_BC}, core C6"
+    },
+    "canonical_reduction": {
+      "L_coordinate": "x=j-(s-c_BC)",
+      "R_coordinate": "y=j+s",
+      "result": "A(q,s)"
+    }
+  },
+  "arithmetic": {
+    "g": "gcd(q,s)",
+    "m": "q/g",
+    "future_quotient": {
+      "g=1": "Q=32q",
+      "g>1,m=1": "Q=52",
+      "g>1,m>1": "Q=32(m+1)"
+    },
+    "Q52_criterion": "q divides 2(delta+c_AB+c_BC)",
+    "resolving_depth": {
+      "m=1": 13,
+      "g=1,m=2": 25,
+      "g=1,m>=3": "20m-29",
+      "g>1,m>1": "20m-9"
+    }
+  },
+  "microscopic_invariants": {
+    "h_AB": {
+      "formula": "gcd(n,c_AB)",
+      "meaning": "number of connected components of the AB-only subgraph"
+    },
+    "h_BC": {
+      "d_BC": "gcd(n,c_BC)",
+      "formula": "d_BC if d_BC divides n/2, else d_BC-2",
+      "meaning": "number of connected components of the BC-only subgraph after the two cardinal C-pair identifications"
+    }
+  },
+  "same_macro_different_micro_witnesses_n12": [
+    {
+      "delta": 1,
+      "c_AB": 1,
+      "c_BC": 1,
+      "s": 6,
+      "h_AB": 1,
+      "h_BC": 1,
+      "Q": 52,
+      "k_min": 13
+    },
+    {
+      "delta": 1,
+      "c_AB": 3,
+      "c_BC": 5,
+      "s": 6,
+      "h_AB": 3,
+      "h_BC": 1,
+      "Q": 52,
+      "k_min": 13
+    },
+    {
+      "delta": 1,
+      "c_AB": 5,
+      "c_BC": 3,
+      "s": 6,
+      "h_AB": 1,
+      "h_BC": 3,
+      "Q": 52,
+      "k_min": 13
+    },
+    {
+      "delta": 1,
+      "c_AB": 4,
+      "c_BC": 4,
+      "s": 6,
+      "h_AB": 4,
+      "h_BC": 2,
+      "Q": 52,
+      "k_min": 13
+    }
+  ],
+  "regression": {
+    "macro": {
+      "q_range": [2, 6],
+      "all_admissible_triples": true,
+      "chirality": "HT+",
+      "cases": 22790,
+      "mismatches": 0
+    },
+    "exhaustive_full": {
+      "q_range": [2, 4],
+      "all_admissible_triples": true,
+      "chiralities": ["HT+", "HT-"],
+      "cases": 9308,
+      "mismatches": 0
+    },
+    "representative_full": {
+      "q_range": [2, 8],
+      "representative_key": "(q,s,h_AB,h_BC)",
+      "representative_classes": 1310,
+      "chiralities": ["HT+", "HT-"],
+      "cases": 2620,
+      "mismatches": 0
+    }
+  },
+  "main_interpretation": {
+    "positive": "c_AB and c_BC are independently real microscopic graph parameters.",
+    "negative": "The current routed terminal system still does not retain two independent annular invariants.",
+    "collapse": "delta,c_AB,c_BC -> lambda=delta+c_AB+c_BC -> s=2lambda",
+    "scientific_value": "The quotient is demonstrably many-to-one: distinct family-labelled graph structures can have identical routed future data."
+  },
+  "next_gate": "Refine the observation alphabet or route marking to test whether the lost microscopic invariants can be recovered, instead of adding more affine offset parameters."
+}

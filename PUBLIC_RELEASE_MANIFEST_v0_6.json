@@ -1,0 +1,62 @@
+{
+  "schema": "pifi.3d.public_release_manifest.v0.6",
+  "date": "2026-10-06",
+  "source_branch": "agent/pifi-3d-publication-grade-consolidation-v06",
+  "recommended_public_repo": "Ecosphera-Lab/pifi-3d-reproducibility",
+  "manuscript": [
+    "paper/pifi_3d_family/main.tex",
+    "paper/pifi_3d_family/references.bib",
+    "paper/pifi_3d_family/README_ARXIV.txt",
+    "paper/pifi_3d_family/BUILD.md"
+  ],
+  "theorem_documents": [
+    "docs/research/pifi_2d_square_ca/PIFI_3D_TN_SPLIT_ANNULAR_OFFSET_THEOREM_v0_1.md",
+    "docs/research/pifi_2d_square_ca/PIFI_3D_REFINED_TERMINAL_INJECTIVITY_THEOREM_v0_1.md",
+    "docs/research/pifi_2d_square_ca/PIFI_3D_REFINED_QUOTIENT_COMPONENT_ORBIT_THEOREM_v0_1.md",
+    "docs/research/pifi_2d_square_ca/PIFI_3D_COMPONENT_PLACEMENT_AFFINE_GAUGE_THEOREM_v0_1.md",
+    "docs/research/pifi_2d_square_ca/PIFI_3D_CRT_PRIME_POWER_PLACEMENT_THEOREM_v0_1.md",
+    "docs/research/pifi_2d_square_ca/PIFI_3D_FINAL_CLASSIFICATION_CONTROL_v0_1.md",
+    "docs/research/pifi_2d_square_ca/PIFI_3D_SPECIALIST_NOVELTY_LITERATURE_AUDIT_v0_1.md"
+  ],
+  "results": [
+    "docs/results/pifi_3d_tn_split_annular_offset_v0_1.json",
+    "docs/results/pifi_3d_refined_terminal_injectivity_v0_1.json",
+    "docs/results/pifi_3d_refined_quotient_component_orbit_v0_1.json",
+    "docs/results/pifi_3d_component_placement_affine_gauge_v0_1.json",
+    "docs/results/pifi_3d_crt_prime_power_placement_v0_1.json",
+    "docs/results/pifi_3d_final_classification_control_v0_1.json",
+    "docs/results/pifi_3d_specialist_novelty_literature_audit_v0_1.json"
+  ],
+  "verifiers": [
+    "tools/verify_pifi_3d_tn_split_annular_offset_v0_1.py",
+    "tools/verify_pifi_3d_refined_terminal_injectivity_v0_1.py",
+    "tools/verify_pifi_3d_refined_quotient_component_orbit_v0_1.py",
+    "tools/verify_pifi_3d_component_placement_affine_gauge_v0_1.py",
+    "tools/verify_pifi_3d_crt_prime_power_placement_v0_1.py",
+    "tools/verify_pifi_3d_final_classification_control_v0_1.py"
+  ],
+  "public_layout": {
+    "manuscript": "paper/",
+    "results": "results/",
+    "verifiers": "tools/",
+    "theorem_documents": "docs/"
+  },
+  "release_requirements": [
+    "Fresh-clone reproduction with Python 3.11+",
+    "Manuscript compiles from clean source",
+    "One top-level run_all.py or equivalent exact reproduction command",
+    "Pinned or dependency-minimal requirements.txt",
+    "SHA256SUMS over frozen release files",
+    "CITATION.cff",
+    "CLAIM_BOUNDARY.md",
+    "NOVELTY_AUDIT.md",
+    "No unrelated private-project material"
+  ],
+  "claim_boundary": [
+    "General rotation-system, symbolic-dynamics, affine-action and CRT machinery is prior art.",
+    "Candidate contribution is the exact classification of the explicitly defined routed family.",
+    "CRT placement equivalence is sufficient for component-colour future equivalence; the converse is not claimed.",
+    "No universal physical significance is claimed for 52 or 6."
+  ],
+  "status": "PUBLICATION PACKAGE STAGED — READY FOR CLEAN PUBLIC SNAPSHOT"
+}

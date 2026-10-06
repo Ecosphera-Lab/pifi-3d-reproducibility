@@ -40,10 +40,23 @@ jobs:
           latexmk_use_xelatex: false
           args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
 
-      - name: Generate SHA256SUMS
+      - name: Generate source-only SHA256SUMS
         run: |
-          find paper tools results docs -type f -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS
-          sha256sum README.md REPRODUCE.md CLAIM_BOUNDARY.md CITATION.cff run_all.py PUBLIC_RELEASE_MANIFEST_v0_6.json >> SHA256SUMS
+          git ls-files -z | grep -zv '^SHA256SUMS
+      - name: Upload reproduction outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: pifi-3d-v0.6-reproduced-results
+          path: |
+            reproduced/
+            SHA256SUMS
+
+      - name: Upload manuscript PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: pifi-3d-family-v0.6-pdf
+          path: paper/main.pdf
+ | sort -z | xargs -0 sha256sum > SHA256SUMS
           cat SHA256SUMS
 
       - name: Upload reproduction outputs

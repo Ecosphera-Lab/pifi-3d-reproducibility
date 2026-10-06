@@ -274,7 +274,7 @@ L_{j+n/2+s-c_{BC}},&j+s\in S,\\
 R_{j+n/2+s},&j+s\notin S.
 \end{cases}
 \]
-The output-block lengths are \(12\) on regular \(L\)-frames, \(20\) on regular \(R\)-frames, and \(12\) on seam-switch frames.
+The output-block lengths are \(12\) on regular \(L\)-frames, \(20\) on regular \(R\)-frames, and \(12\) on seam-switch frames. We denote these three coarse block types by \(C3\), \(C20\), and \(C6\), respectively; their explicit output words are listed in Appendix~\ref{app:frames}.
 \end{theorem}
 
 \begin{proof}
@@ -658,7 +658,7 @@ The cardinal seam set is preserved by affine index relabellings
 \[
 j\mapsto uj+t\pmod n,
 \]
-where \(u\in U(n)\) and \(t\in\{0,q,2q,3q\}\).
+where \(U(n)=(\ZZ/n\ZZ)^\times\), \(u\in U(n)\), and \(t\in\{0,q,2q,3q\}\).
 After component-label renaming, \(t\) is immaterial, while
 \[
 (s,\rho)\mapsto

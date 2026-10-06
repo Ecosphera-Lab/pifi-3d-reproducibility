@@ -34,3 +34,9 @@ Thumbs.db
 # Local temporary release directories
 dist/
 build/
+
+# Reproduction outputs
+reproduced/
+
+# Built manuscript artifacts (distributed through Actions/release assets)
+*.pdf

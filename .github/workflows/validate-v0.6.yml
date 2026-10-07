@@ -10,6 +10,9 @@ on:
       - 'results/**'
       - 'docs/**'
       - 'run_all.py'
+      - 'test_release_json.py'
+      - 'verify_release.py'
+      - 'SHA256SUMS'
       - 'README.md'
       - 'REPRODUCE.md'
       - 'CLAIM_BOUNDARY.md'
@@ -28,6 +31,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      - name: Test release certificate validation
+        run: python -m unittest -v test_release_json
+
+      - name: Verify frozen release anchors
+        run: python verify_release.py
 
       - name: Run frozen verifier chain
         run: python run_all.py

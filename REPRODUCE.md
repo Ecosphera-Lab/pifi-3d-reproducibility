@@ -70,3 +70,22 @@ latexmk -pdf -file-line-error -halt-on-error -interaction=nonstopmode main.tex
 A successful reproduction certifies the frozen finite/combinatorial claims in
 the tested scopes. It does not establish publication priority, physical
 continuum validity, or novelty of standard mathematical machinery.
+
+## Fail-closed certificate validation
+
+The top-level runner deletes each previous output before execution, requires
+its verifier to exit successfully, and parses the newly generated JSON.
+Missing, malformed (including literal `\\n` after the closing brace),
+wrong-schema or non-PASS results stop the chain immediately.
+
+Run the regression tests separately:
+
+```bash
+python -m unittest -v test_release_json
+```
+
+After obtaining the frozen release tag, verify every tracked source file:
+
+```bash
+sha256sum -c SHA256SUMS
+```

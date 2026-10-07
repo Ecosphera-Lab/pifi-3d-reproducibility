@@ -66,7 +66,7 @@ Python 3.11+ is recommended.
 python run_all.py
 ```
 
-The verifier chain is standard-library Python only.
+The verifier chain is standard-library Python only. Each newly produced certificate is strictly parsed and checked before the runner can report PASS.
 
 For manuscript compilation:
 

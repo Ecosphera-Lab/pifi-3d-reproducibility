@@ -1,0 +1,160 @@
+{
+  "schema": "pifi.3d.specialist_novelty_literature_audit.v0.1",
+  "date": "2026-10-06",
+  "branch": "agent/pifi-3d-specialist-novelty-audit-v01",
+  "status": "TARGETED PRIOR-ART PASS COMPLETE — FAMILY-SPECIFIC NOVELTY CANDIDATE",
+  "top_level_verdict": {
+    "mathematical_branch": "FREEZE",
+    "general_machinery": "PRIOR ART / DO NOT CLAIM NOVELTY",
+    "exact_family_classification": "CREDIBLE NOVELTY CANDIDATE",
+    "publication_confidence": "MODERATE-TO-STRONG AS A SPECIAL-FAMILY CLASSIFICATION",
+    "wording": "NOT LOCATED IN TARGETED PRIOR-ART PASS — NOT YET A GLOBAL NOVELTY CLAIM"
+  },
+  "standard_prior_art": [
+    {
+      "topic": "darts and rotation systems / combinatorial maps",
+      "status": "standard",
+      "sources": [
+        "Three-dimensional maps and subgroup growth, Manuscripta Mathematica, DOI 10.1007/s00229-021-01321-7"
+      ]
+    },
+    {
+      "topic": "voltage graphs, derived covers, cycle lifting, gcd/order effects",
+      "status": "standard",
+      "sources": [
+        "Gross & Tucker, Topological Graph Theory, Wiley, 1987",
+        "Voltage Operations on Maniplexes, Polytopes and Maps, Combinatorica 43 (2023), DOI 10.1007/s00493-023-00018-7",
+        "Electronic Journal of Combinatorics Dynamic Cage Survey, voltage graph lifts"
+      ]
+    },
+    {
+      "topic": "future/follower equivalence and minimal finite-state presentations",
+      "status": "standard",
+      "sources": [
+        "Lind & Marcus, An Introduction to Symbolic Dynamics and Coding, 2nd ed., DOI 10.1017/9781108899727",
+        "Johansen, On the Structure of Covers of Sofic Shifts, DOI 10.4171/DM/328",
+        "Thomsen, On the future cover of a sofic shift, arXiv:2512.01368",
+        "Myhill-Nerode theorem"
+      ]
+    },
+    {
+      "topic": "factor maps / observation recoding",
+      "status": "standard",
+      "sources": [
+        "Scholarpedia, Symbolic dynamics"
+      ]
+    },
+    {
+      "topic": "primitive cyclic words / necklaces",
+      "status": "standard",
+      "sources": [
+        "European Journal of Combinatorics 33 (2012), 1537-1546, DOI 10.1016/j.ejc.2012.03.016"
+      ]
+    },
+    {
+      "topic": "affine / coset-wise affine permutation cycle structures",
+      "status": "established research area",
+      "sources": [
+        "Bors & Wang, Finite Fields and Their Applications 83 (2022), DOI 10.1016/j.ffa.2022.102088"
+      ]
+    },
+    {
+      "topic": "finite abelian p-group and finite chain-ring orbit classification",
+      "status": "established research area",
+      "sources": [
+        "Dutta & Prasad, JCTA 118 (2011), DOI 10.1016/j.jcta.2011.02.002",
+        "Cao, Communications in Algebra 39 (2011), DOI 10.1080/00927870903390652",
+        "Birkhoff, Subgroups of Abelian Groups, Proc. LMS (2) 38 (1935)"
+      ]
+    }
+  ],
+  "candidate_contributions": [
+    {
+      "claim": "exact macro reduction of T_{n;delta,c_AB,c_BC} to A(q,s) with s=2(delta+c_AB+c_BC)",
+      "novelty": "strong family-specific candidate",
+      "risk": "low-to-medium"
+    },
+    {
+      "claim": "closed formulas for coarse Q, k_min and routing census",
+      "novelty": "strong family-specific candidate",
+      "risk": "low"
+    },
+    {
+      "claim": "original-slice corollary Q=52 iff n in {8,12,24}",
+      "novelty": "family-specific corollary candidate",
+      "risk": "low"
+    },
+    {
+      "claim": "explicit many-to-one graph microstructure to coarse future quotient, with AB/BC component formulas",
+      "novelty": "specific witnesses and exact formulas are candidate contributions; general phenomenon standard",
+      "risk": "medium"
+    },
+    {
+      "claim": "component-aware refined quotient and exact decorated macro-orbit predictor",
+      "novelty": "strong family-specific reduction candidate",
+      "risk": "medium"
+    },
+    {
+      "claim": "Q_comp not determined by (n,s,h_AB,h_BC) alone",
+      "novelty": "specific negative theorem candidate",
+      "risk": "low"
+    },
+    {
+      "claim": "affine placement normal form and CRT reduction",
+      "novelty": "family-specific reduction candidate; general orbit/CRT machinery standard",
+      "risk": "medium-to-high if overclaimed"
+    },
+    {
+      "claim": "end-to-end exactly solvable observation-dependent routed-family classification",
+      "novelty": "strongest integrated novelty candidate",
+      "risk": "low-to-medium"
+    }
+  ],
+  "exact_searches": {
+    "searched_phrases": [
+      "routed rotation system graph",
+      "future quotient rotation system",
+      "component-labelled macro orbit",
+      "52 future states graph dynamics",
+      "gcd(q,6) graph routing dynamics",
+      "C3 C6 C20 routing graph",
+      "component-orbit future quotient symbolic dynamics"
+    ],
+    "direct_match_found": false,
+    "interpretation": "absence of a match supports only 'not located in targeted prior-art pass', not a proof of novelty"
+  },
+  "terminology_translation": {
+    "routed system": "finite deterministic output/permutation system on darts",
+    "rotation template": "rotation system / combinatorial-map local rotation data",
+    "future quotient": "follower/right-language quotient; Nerode-style output equivalence",
+    "terminal observation": "output labeling / observation map",
+    "refined terminal observation": "output-alphabet / observation-partition refinement",
+    "component orbit": "component-decorated periodic orbit",
+    "primitive terminal word": "primitive cyclic output word / necklace representative",
+    "macro dynamics": "induced/return permutation on frame-entry states",
+    "affine gauge": "relabeling/conjugacy under affine index action",
+    "CRT placement signature": "prime-power invariant of diagonal scalar-unit action"
+  },
+  "claim_boundaries": [
+    "Do not claim novelty for darts/rotation systems.",
+    "Do not claim novelty for voltage graph lifts or gcd/order cycle behavior.",
+    "Do not claim novelty for future/follower/Nerode quotienting.",
+    "Do not claim novelty for observation/factor-map ideas.",
+    "Do not claim novelty for primitive cyclic words.",
+    "Do not claim a new general affine-permutation or finite-abelian-group orbit theory.",
+    "Do not claim CRT placement class is necessary for equality of every future language; final control found coarser cross-CRT future-language coincidences.",
+    "Do not assign universal physical significance to 52 or 6 from this combinatorial classification."
+  ],
+  "recommended_publication": {
+    "title": "An exactly solvable family of routed rotation systems with observation-dependent future quotients",
+    "subtitle": "Arithmetic macro reduction, information loss, component-decorated periodic orbits, and CRT placement classes",
+    "central_claim": "complete exact classification of the explicitly defined family, not novelty of the standard underlying machinery"
+  },
+  "remaining_clearance": [
+    "MathSciNet search",
+    "zbMATH Open search",
+    "Google Scholar similarity/cited-by search",
+    "external specialist read in symbolic dynamics or topological graph theory"
+  ],
+  "next_stage": "publication-grade consolidation and public reproducibility packaging"
+}

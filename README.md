@@ -1,85 +1,96 @@
 # PIFI-3D Reproducibility Package
 
-Public reproducibility package for the manuscript
+Public reproducibility snapshot for the manuscript
 
-**From PIFI Geometry to a 52-State Future Quotient: A C4-Equivariant Routed-Voltage Construction**
+**An Exactly Solvable Family of Routed Rotation Systems with Observation-Dependent Future Quotients**
 
 Author: **Maks Katsubo**  
 Organization: **Ecosphera-Lab**
 
-## Purpose
+## What this release contains
 
-This is a curated public release for the finite mathematical claims of the PIFI-3D study. The broader research repository remains private.
-
-The principal chain is
+This v0.6 snapshot is intentionally narrow. It reproduces the frozen family-classification chain
 
 [
-	ext{geometry}
-	o
-	ext{exact split / local rotation system}
-	o
-O,U,R3,C3,C6,C20,T(C)
-	o
-8,12,12,20
-	o
-52
-	o
-	ext{fiber-return / voltage / }V_4
-	o
-	ext{finite controls}.
+\mathcal T_{n;\delta,c_{AB},c_{BC}}
+\to
+s=2(\delta+c_{AB}+c_{BC})
+\to
+\mathcal A(q,s)
+\to
+(Q,k_{\min},\text{routing census})
 ]
 
-The current manuscript also proves that the exact PIFI realization is not isolated: after scale normalization it belongs to a nonempty open two-parameter radial-shell realization chamber with the same labelled split rotation system and the same decorated routed dynamics.
+followed by
 
-## Current public-release state
+[
+\text{component-aware observation}
+\to
+\text{decorated macro orbits}
+\to
+\text{affine placement}
+\to
+\text{CRT prime-power classification}.
+]
 
-The repository currently contains the public metadata and a **strict whitelist synchronizer**.
+The original PIFI point is
 
-The scientific files are intentionally copied from the private research tree only through:
+[
+n=12,\qquad
+(\delta,c_{AB},c_{BC})=(1,1,1),
+]
 
-- `PUBLIC_RELEASE_MANIFEST.txt`
-- `sync_public_release.ps1`
+with
 
-This makes accidental publication of unrelated private project material much less likely.
+[
+Q=52,\qquad k_{\min}=13,
+]
 
-After the whitelist sync, the scientific tree preserves the source paths expected by the verifiers:
+and primitive periods (8,12,12,20).
 
-- `paper/pifi_3d/` — manuscript, figures and visual supplements;
-- `docs/results/` — frozen machine-readable certificates;
-- `docs/research/pifi_2d_square_ca/` — selected human-readable audits/theorems;
-- `tools/` — exact verifier and control scripts;
-- `visualizations/v13_r90_validation/` — canonical geometry source.
+## Repository layout
 
-See `REPRODUCE.md` for execution order.
+- `paper/` — consolidated LaTeX manuscript v0.6;
+- `tools/` — frozen exact verifiers;
+- `results/` — frozen machine-readable certificates;
+- `docs/` — theorem/audit documents;
+- `run_all.py` — one-command reproduction chain;
+- `CLAIM_BOUNDARY.md` — exact scope and nonclaims;
+- `PUBLIC_RELEASE_MANIFEST_v0_6.json` — release whitelist.
 
-## Claim boundary
+## Quick reproduction
 
-This package supports exact finite claims for the frozen construction and its proved local radial-shell realization family.
+Python 3.11+ is recommended.
 
-It does **not** claim:
-
-- a continuum physical law;
-- global uniqueness among all routed-voltage systems;
-- that the full parameter domain `0 < a < b < 1` is one realization chamber;
-- novelty of standard voltage/gain graph, automata, switching, or graph-cohomological machinery;
-- publication priority.
-
-## Local safe sync
-
-The source working tree must be on:
-
-`agent/pifi-3d-manuscript-v05-family`
-
-Then run the included PowerShell script with the private and public repository paths. It copies only files listed in `PUBLIC_RELEASE_MANIFEST.txt`.
-
-Before pushing, always inspect:
-
-```powershell
-git status
+```bash
+python run_all.py
 ```
 
-No file outside the whitelist should appear.
+The verifier chain is standard-library Python only. Each newly produced certificate is strictly parsed and checked before the runner can report PASS.
+
+For manuscript compilation:
+
+```bash
+cd paper
+latexmk -pdf -file-line-error -halt-on-error -interaction=nonstopmode main.tex
+```
+
+## Novelty boundary
+
+The general machinery of rotation systems, symbolic/future equivalence,
+primitive cyclic words, affine actions and CRT is established prior art.
+
+The candidate contribution is the **exact solvability and integrated arithmetic
+classification of the explicitly defined routed family**.
+
+Current wording:
+
+> **Not located in the targeted prior-art pass; not yet a global novelty claim.**
+
+See `docs/PIFI_3D_SPECIALIST_NOVELTY_LITERATURE_AUDIT_v0_1.md`.
 
 ## Release status
 
-**v0.5 family-generalization candidate.**
+**v0.6 publication-grade consolidation candidate.**
+
+This branch is intended to be validated from a clean checkout before merge/tag.

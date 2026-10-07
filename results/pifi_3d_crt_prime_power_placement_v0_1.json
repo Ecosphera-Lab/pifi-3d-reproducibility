@@ -1,0 +1,151 @@
+{
+  "schema": "pifi.3d.crt_prime_power_placement.v0.1",
+  "date": "2026-10-06",
+  "branch": "agent/pifi-3d-crt-prime-power-placement-v01",
+  "status": "STRONG PASS — COMPLETE CRT / PRIME-POWER CLASSIFICATION",
+  "theorem": {
+    "action": "(s,rho)->(u*s mod n,u*rho mod d), u in U(n), d|n",
+    "factorization": "n=product p^e_p, d=product p^f_p",
+    "local_invariant": {
+      "a_p": "min(v_p(s),e_p)",
+      "b_p": "min(v_p(rho),f_p)",
+      "m_p": "min(e_p-a_p,f_p-b_p) when both coordinates are nonzero",
+      "r_p": "(rho/p^b_p)*(s/p^a_p)^(-1) mod p^m_p"
+    },
+    "equivalence_criterion": "same U(n)-orbit iff all local (a_p,b_p,m_p,r_p) agree",
+    "p2_exception": false
+  },
+  "witnesses": {
+    "n12_affine_equivalence": {
+      "n": 12,
+      "d": 3,
+      "pair_A": [
+        10,
+        1
+      ],
+      "pair_B": [
+        2,
+        2
+      ],
+      "same_CRT_signature": true,
+      "explanation": "at p=3 both have relative unit ratio 1 mod 3"
+    },
+    "n12_gcd_only_failure": {
+      "n": 12,
+      "d": 3,
+      "pair_A": [
+        10,
+        1
+      ],
+      "pair_B": [
+        2,
+        1
+      ],
+      "same_simple_gcd_data": true,
+      "same_CRT_signature": false,
+      "explanation": "at p=3 the relative unit ratios are 1 and 2 mod 3"
+    },
+    "n16_prime_power_ratio": {
+      "n": 16,
+      "d": 8,
+      "pair_A": [
+        2,
+        2
+      ],
+      "pair_B": [
+        2,
+        6
+      ],
+      "same_valuations": true,
+      "same_CRT_signature": false,
+      "explanation": "at p=2: a=b=1,m=2, ratios 1 and 3 mod 4"
+    }
+  },
+  "regression": {
+    "generic_pair_theorem": {
+      "n_range": [
+        2,
+        64
+      ],
+      "all_divisors_d": true,
+      "all_pairs_s_rho": true,
+      "pairs": 146965,
+      "signature_to_orbit_mismatches": 0,
+      "orbit_to_signature_mismatches": 0
+    },
+    "PIFI_family_bijection": {
+      "q_range": [
+        2,
+        8
+      ],
+      "triples": 70574,
+      "old_affine_classes": 862,
+      "crt_classes": 862,
+      "bijection_mismatches": 0
+    },
+    "extended_family_census": {
+      "q_range": [
+        2,
+        12
+      ],
+      "triples": 349294,
+      "crt_classes": 2665,
+      "per_n": {
+        "8": {
+          "triples": 294,
+          "crt_classes": 19
+        },
+        "12": {
+          "triples": 1210,
+          "crt_classes": 92
+        },
+        "16": {
+          "triples": 3150,
+          "crt_classes": 56
+        },
+        "20": {
+          "triples": 6498,
+          "crt_classes": 116
+        },
+        "24": {
+          "triples": 11638,
+          "crt_classes": 305
+        },
+        "28": {
+          "triples": 18954,
+          "crt_classes": 140
+        },
+        "32": {
+          "triples": 28830,
+          "crt_classes": 134
+        },
+        "36": {
+          "triples": 41650,
+          "crt_classes": 468
+        },
+        "40": {
+          "triples": 57798,
+          "crt_classes": 379
+        },
+        "44": {
+          "triples": 77658,
+          "crt_classes": 188
+        },
+        "48": {
+          "triples": 101614,
+          "crt_classes": 768
+        }
+      }
+    }
+  },
+  "final_placement_signature": "Theta_CRT=(n,d_AB,d_BC,{(a_p,b_p,m_p,r_p)}_{p|n})",
+  "equivalent_graph_signature": "Theta_CRT=(n,h_AB,h_BC,eps_BC,{(a_p,b_p,m_p,r_p)}_{p|n})",
+  "interpretation": [
+    "The finite unit-orbit search chi is eliminated exactly.",
+    "The global orbit factorizes by CRT into prime-power orbit problems.",
+    "Valuation data alone are insufficient whenever both coordinates survive at the same prime.",
+    "The only additional local datum is the relative unit ratio on the common nonzero p-power layer.",
+    "No exceptional p=2 branch is required."
+  ],
+  "next_gate": "FINAL CLASSIFICATION / NECESSITY-SUFFICIENCY CONTROL"
+}

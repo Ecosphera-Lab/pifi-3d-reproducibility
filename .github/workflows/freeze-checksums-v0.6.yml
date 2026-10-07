@@ -1,0 +1,28 @@
+name: Freeze PIFI-3D v0.6 checksums
+
+on:
+  push:
+    branches:
+      - release/pifi-3d-family-v0.6
+    paths:
+      - '.github/workflows/freeze-checksums-v0.6.yml'
+  workflow_dispatch:
+
+jobs:
+  checksums:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate source-only SHA256SUMS
+        shell: bash
+        run: |
+          git ls-files -z | grep -zv '^SHA256SUMS$' | sort -z | xargs -0 sha256sum > SHA256SUMS
+          cat SHA256SUMS
+
+      - name: Upload SHA256SUMS
+        uses: actions/upload-artifact@v4
+        with:
+          name: pifi-3d-v0.6-source-checksums
+          path: SHA256SUMS

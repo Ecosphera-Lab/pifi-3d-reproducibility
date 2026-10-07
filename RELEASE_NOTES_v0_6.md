@@ -68,3 +68,14 @@ python run_all.py
 ## Publication-priority wording
 
 > Not located in the targeted prior-art pass; not yet a global novelty claim.
+
+## v0.6 release quality gate (2026-10-07)
+
+A final release review identified a literal `\\n` suffix in the affine-gauge
+verifier's emitted JSON. The verifier output has been corrected, and
+`run_all.py` now validates every fresh JSON result, failing on malformed
+output or invalid schema/status. Regression tests reproduce the former failure.
+This is a release-format fix, not a change to mathematical formulas.
+
+The committed `SHA256SUMS` covers the tracked source tree except itself.
+On a clean checkout, check it using `sha256sum -c SHA256SUMS`.

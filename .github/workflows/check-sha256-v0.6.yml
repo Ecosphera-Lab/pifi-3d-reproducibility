@@ -1,0 +1,25 @@
+name: Verify PIFI-3D v0.6 source checksums
+
+on:
+  push:
+    branches:
+      - release/pifi-3d-family-v0.6
+      - main
+    paths:
+      - 'SHA256SUMS'
+  workflow_dispatch:
+
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout release tree
+        uses: actions/checkout@v4
+      - name: Verify tracked source checksums
+        shell: bash
+        run: |
+          sha256sum --check --strict SHA256SUMS
+          expected=$(git ls-files | grep -v '^SHA256SUMS$' | wc -l)
+          actual=$(wc -l < SHA256SUMS)
+          test "$actual" -eq "$expected"
